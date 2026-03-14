@@ -134,7 +134,7 @@ while True:
         # AJUSTE FINO DA MÁSCARA (substituir)
         # =========================
         face_width = w
-        scale_w = 1.4  # aumente/reduza este valor para ajustar o tamanho
+        scale_w = 1.6  # aumente/reduza este valor para ajustar o tamanho
         mask_w = int(face_width * scale_w)
 
         # preservar proporção original da máscara (altura/largura)
@@ -143,7 +143,7 @@ while True:
 
         # centralizar horizontalmente e deslocar verticalmente (ajuste conforme necessário)
         mask_x = x - (mask_w - w) // 2
-        mask_y = y - int(mask_h * 0.20)  # move a máscara para cima; ajuste o 0.35 se necessário
+        mask_y = y - int(mask_h * 0.23)  # move a máscara para cima; ajuste o 0.35 se necessário
 
         frame = overlay_png(frame, mask, mask_x, mask_y, mask_w, mask_h)
 
