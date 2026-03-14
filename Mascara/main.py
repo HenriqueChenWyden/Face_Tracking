@@ -131,17 +131,24 @@ while True:
         )
 
         # =========================
-        # AJUSTE FINO DA MÁSCARA
+        # AJUSTE FINO DA MÁSCARA (substituir)
         # =========================
-        mask_w = int(w * 1.05)
-        mask_h = int(h * 1.15)
+        face_width = w
+        scale_w = 1.4  # aumente/reduza este valor para ajustar o tamanho
+        mask_w = int(face_width * scale_w)
 
-        mask_x = x - int((mask_w - w) / 2)
-        mask_y = y - int(h * 0.05)
+        # preservar proporção original da máscara (altura/largura)
+        mask_aspect = mask.shape[0] / mask.shape[1]
+        mask_h = int(mask_w * mask_aspect)
+
+        # centralizar horizontalmente e deslocar verticalmente (ajuste conforme necessário)
+        mask_x = x - (mask_w - w) // 2
+        mask_y = y - int(mask_h * 0.20)  # move a máscara para cima; ajuste o 0.35 se necessário
 
         frame = overlay_png(frame, mask, mask_x, mask_y, mask_w, mask_h)
 
-    cv2.imshow("Filtro Expert - Po Kung Fu Panda", frame)
+        cv2.imshow("Filtro Expert - Po Kung Fu Panda", frame)
+
 
     if cv2.waitKey(1) & 0xFF == ord("q"):
         break
